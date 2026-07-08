@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 18th Birthday Arya!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap');
+
+  :root{
+    --bg-black:#0d0202;
+    --bg-maroon:#210606;
+    --maroon:#450b0b;
+    --crimson:#7a1414;
+    --red-accent:#b91f1f;
+    --red-bright:#e0293a;
+    --gold:#d4af37;
+    --rosegold:#e3b8a0;
+    --text-light:#f7e9dd;
+    --text-muted:#cf9d9d;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html,body{
+    height:100%;
+    background:
+      radial-gradient(ellipse at 50% 0%, var(--bg-maroon) 0%, var(--bg-black) 65%);
+    color:var(--text-light);
+    font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--red-accent); color:var(--text-light); }
+
+  /* ---------- floating background ---------- */
+  #bg-layer{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+  }
+  .drift{
+    position:absolute;
+    bottom:-10%;
+    opacity:0;
+    animation-name:floatUp;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    filter: drop-shadow(0 0 6px rgba(224,41,58,.45));
+  }
+  .drift.heart{ color:var(--red-accent); }
+  .drift.spark{ color:var(--gold); }
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg) scale(.6); opacity:0; }
+    10%{ opacity:.85; }
+    50%{ transform:translateY(-55vh) translateX(15px) rotate(15deg) scale(1); }
+    90%{ opacity:.6; }
+    100%{ transform:translateY(-115vh) translateX(-10px) rotate(-10deg) scale(.7); opacity:0; }
+  }
+
+  /* ================= INTRO / CAKE SLICE ================= */
+  #intro{
+    position:fixed; inset:0;
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(ellipse at 50% 40%, var(--bg-maroon) 0%, var(--bg-black) 75%);
+    transition:opacity 1s ease, visibility 1s ease;
+  }
+  #intro.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+
+  .intro-title{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(2.2rem, 6vw, 3.6rem);
+    color:var(--gold);
+    margin-bottom:6px;
+    text-shadow:0 0 18px rgba(212,175,55,.4);
+  }
+  .intro-sub{
+    font-family:'Poppins',sans-serif;
+    font-weight:300;
+    letter-spacing:2px;
+    font-size:.8rem;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    margin-bottom:40px;
+  }
+
+  .cake-scene{
+    position:relative;
+    width:280px;
+    height:260px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .plate{
+    position:absolute;
+    bottom:10px; left:50%;
+    transform:translateX(-50%);
+    width:230px; height:26px;
+    background:linear-gradient(180deg, #3a1010, #1a0606);
+    border-radius:50%;
+    box-shadow:0 0 25px rgba(0,0,0,.6), 0 0 30px rgba(185,31,31,.15) inset;
+  }
+
+  .cake{
+    position:absolute;
+    bottom:32px; left:50%;
+    width:190px;
+    height:130px;
+    transform:translateX(-50%);
+    transition:transform 1.1s cubic-bezier(.6,-0.2,.7,1.4);
+  }
+  .cake-half{
+    position:absolute; top:0; width:50%; height:100%;
+    overflow:hidden;
+  }
+  .cake-half.left{ left:0; transform-origin:right center; }
+  .cake-half.right{ right:0; transform-origin:left center; }
+
+  .layer{
+    position:absolute; left:0; width:200%;
+    border-radius:6px 6px 4px 4px;
+  }
+  .cake-half.right .layer{ left:-100%; }
+
+  .layer-top{
+    top:0; height:38px;
+    background:linear-gradient(180deg,#7a1414,#5c0f0f);
+    box-shadow:0 2px 4px rgba(0,0,0,.35) inset;
+  }
+  .layer-mid{
+    top:36px; height:46px;
+    background:linear-gradient(180deg,#450b0b,#2c0707);
+  }
+  .layer-bottom{
+    top:80px; height:50px;
+    background:linear-gradient(180deg,#2c0707,#1a0404);
+    border-radius:4px 4px 10px 10px;
+  }
+  .frosting{
+    position:absolute; top:-10px; left:0; width:200%; height:22px;
+    background:
+      radial-gradient(circle at 10px 10px, var(--rosegold) 8px, transparent 9px) repeat-x,
+      linear-gradient(180deg, var(--rosegold), #c98f6e);
+    background-size:20px 20px, 100% 100%;
+    border-radius:6px 6px 0 0;
+  }
+  .cake-half.right .frosting{ left:-100%; }
+
+  .cut-mark{
+    position:absolute; top:-14px; bottom:-4px; left:50%;
+    width:3px;
+    transform:translateX(-50%);
+    background:linear-gradient(180deg, var(--gold), transparent);
+    opacity:0;
+  }
+
+  .candle{
+    position:absolute; top:-58px;
+    width:8px; height:34px;
+    background:repeating-linear-gradient(180deg, var(--rosegold) 0 6px, #b9835f 6px 8px);
+    border-radius:2px;
+  }
+  .candle:nth-child(1){ left:38px; }
+  .candle:nth-child(2){ left:90px; }
+  .candle:nth-child(3){ left:142px; }
+  .flame{
+    position:absolute; top:-16px; left:50%;
+    width:9px; height:16px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle at 50% 70%, #ffe08a, var(--red-bright) 70%, transparent 100%);
+    border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+    animation:flicker 1.4s ease-in-out infinite alternate;
+  }
+  @keyframes flicker{
+    0%{ transform:translateX(-50%) scale(1) rotate(-3deg); }
+    100%{ transform:translateX(-50%) scale(1.15) rotate(3deg); }
+  }
+
+  .knife{
+    position:absolute;
+    top:-70px; left:60%;
+    width:110px;
+    transform:rotate(38deg);
+    transform-origin:80% 20%;
+    z-index:5;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,.5));
+    animation:hover 1.8s ease-in-out infinite;
+  }
+  @keyframes hover{
+    0%,100%{ transform:rotate(38deg) translateY(0); }
+    50%{ transform:rotate(34deg) translateY(-6px); }
+  }
+  .blade{
+    width:70px; height:16px;
+    background:linear-gradient(180deg,#f2f2f2,#b7bdc4 55%,#8b9096);
+    clip-path:polygon(0 30%, 78% 0, 100% 50%, 78% 100%, 0 70%);
+    box-shadow:0 0 6px rgba(255,255,255,.4) inset;
+  }
+  .handle{
+    width:42px; height:13px;
+    margin-left:-4px;
+    background:linear-gradient(180deg,#3a0d0d,#1a0505);
+    border-radius:0 6px 6px 0;
+    border:1px solid var(--gold);
+  }
+  .knife-wrap{ display:flex; align-items:center; }
+
+  .slice-hint{
+    margin-top:26px;
+    font-size:.85rem;
+    letter-spacing:1px;
+    color:var(--text-muted);
+    animation:pulseText 2s ease-in-out infinite;
+  }
+  @keyframes pulseText{ 0%,100%{opacity:.5;} 50%{opacity:1;} }
+
+  /* slicing state */
+  .cake-scene.sliced .knife{
+    animation:none;
+    transform:rotate(90deg) translate(10px, 140px);
+    transition:transform .55s cubic-bezier(.5,0,.5,1);
+  }
+  .cake-scene.sliced .cake-half.left{ transform:translateX(-46px) rotate(-9deg); }
+  .cake-scene.sliced .cake-half.right{ transform:translateX(46px) rotate(9deg); }
+  .cake-scene.sliced .cut-mark{ opacity:1; }
+
+  .confetti-piece{
+    position:absolute;
+    width:7px; height:12px;
+    top:50%; left:50%;
+    opacity:0;
+    pointer-events:none;
+  }
+  .confetti-piece.burst{
+    animation:burst 900ms ease-out forwards;
+  }
+  @keyframes burst{
+    0%{ opacity:1; transform:translate(0,0) rotate(0deg) scale(1); }
+    100%{ opacity:0; transform:translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(.4); }
+  }
+
+  /* ================= MAIN CONTENT ================= */
+  #main{
+    position:relative;
+    z-index:1;
+    max-width:900px;
+    margin:0 auto;
+    padding:70px 24px 100px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h1.main-title{
+    font-family:'Playfair Display', serif;
+    font-weight:900;
+    font-size:clamp(2.4rem, 7vw, 4.6rem);
+    line-height:1.05;
+    background:linear-gradient(180deg, #fff0e8, var(--rosegold) 55%, var(--red-accent));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 40px rgba(224,41,58,.25);
+  }
+  .script-line{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    color:var(--rosegold);
+    margin-top:6px;
+  }
+
+  .divider{
+    width:80px; height:2px;
+    margin:40px auto;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* hearts row */
+  .hearts-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:60px;
+    justify-content:center;
+    align-items:flex-start;
+    margin:20px 0 40px;
+  }
+
+  .heart-block{ display:flex; flex-direction:column; align-items:center; }
+  .heart-label{
+    font-size:.75rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-top:18px;
+  }
+
+  .heart-shape{
+    position:relative;
+    width:260px;
+    height:260px;
+    clip-path:url(#heartClip);
+    background:
+      radial-gradient(circle at 35% 25%, rgba(255,255,255,.12), transparent 45%),
+      linear-gradient(155deg, var(--red-bright) 0%, var(--crimson) 45%, var(--bg-maroon) 100%);
+    box-shadow:0 0 45px rgba(224,41,58,.45);
+    animation:heartbeat 1.8s ease-in-out infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  @keyframes heartbeat{
+    0%, 100%{ transform:scale(1); }
+    15%{ transform:scale(1.045); }
+    30%{ transform:scale(1); }
+    45%{ transform:scale(1.03); }
+    60%{ transform:scale(1); }
+  }
+
+  .heart-shape.photo{
+    background: radial-gradient(circle at 50% 50%, var(--crimson) 0%, var(--bg-maroon) 100%);
+  }
+  .heart-shape.photo img{
+    width:100%; height:100%;
+    object-fit:contain;
+    padding:12px;
+    display:block;
+  }
+
+  .timer-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:var(--text-light);
+    padding-top:6px;
+  }
+  .age-number{
+    font-family:'Playfair Display', serif;
+    font-weight:900;
+    font-size:3.1rem;
+    line-height:1;
+    text-shadow:0 2px 10px rgba(0,0,0,.5);
+  }
+  .age-caption{
+    font-size:.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--text-light);
+    opacity:.85;
+    margin-top:4px;
+  }
+  .age-detail{
+    margin-top:10px;
+    font-size:.78rem;
+    line-height:1.5;
+    color:#ffe9e2;
+    opacity:.95;
+  }
+  .age-detail b{ font-weight:600; }
+
+  /* message card */
+  .message-card{
+    max-width:640px;
+    margin:20px auto 0;
+    padding:44px 38px;
+    border-radius:18px;
+    background:linear-gradient(160deg, rgba(122,20,20,.35), rgba(13,2,2,.55));
+    border:1px solid rgba(212,175,55,.25);
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    position:relative;
+  }
+  .message-card::before{
+    content:"❝";
+    position:absolute;
+    top:-6px; left:24px;
+    font-size:3.2rem;
+    color:var(--gold);
+    opacity:.5;
+    font-family:'Playfair Display', serif;
+  }
+  .message-text{
+    font-size:1.05rem;
+    line-height:1.9;
+    color:var(--text-light);
+    font-weight:300;
+    text-align: left;
+  }
+  .message-sign{
+    margin-top:30px;
+    font-family:'Great Vibes', cursive;
+    font-size:2rem;
+    color:var(--rosegold);
+    text-align: right;
+  }
+
+  footer{
+    margin-top:70px;
+    font-size:.72rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+  }
+
+  /* Invisible YouTube frame wrapper layout */
+  .hidden-audio-wrapper {
+    position: absolute; 
+    width: 1px; height: 1px; 
+    padding: 0; margin: -1px; 
+    overflow: hidden; 
+    clip: rect(0, 0, 0, 0); 
+    white-space: nowrap; 
+    border: 0; 
+    opacity: 0; 
+    pointer-events: none;
+  }
+
+  @media (max-width:560px){
+    .heart-shape{ width:210px; height:210px; }
+    .hearts-row{ gap:36px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,0.92 C0.32,0.75 0,0.52 0,0.28 C0,0.06 0.22,-0.06 0.5,0.16 C0.78,-0.06 1,0.06 1,0.28 C1,0.52 0.68,0.75 0.5,0.92 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<div class="hidden-audio-wrapper">
+  <iframe id="secretVideo" width="100" height="100" src="" title="Audio Engine" frameborder="0" allow="autoplay; encrypted-media;"></iframe>
+</div>
+
+<div id="bg-layer"></div>
+
+<div id="intro">
+  <div class="intro-title">A Little Surprise Awaits</div>
+  <div class="intro-sub">Slice the cake to open it</div>
+
+  <div class="cake-scene" id="cakeScene">
+    <div class="knife-wrap knife" id="knife">
+      <div class="blade"></div>
+      <div class="handle"></div>
+    </div>
+
+    <div class="cake" id="cake">
+      <div class="cake-half left">
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-mid"></div>
+        <div class="layer layer-top"></div>
+        <div class="frosting"></div>
+      </div>
+      <div class="cake-half right">
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-mid"></div>
+        <div class="layer layer-top"></div>
+        <div class="frosting"></div>
+      </div>
+      <div class="cut-mark"></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <div class="plate"></div>
+    <div id="confettiHost"></div>
+  </div>
+
+  <div class="slice-hint">tap the knife 🔪</div>
+</div>
+
+<div id="main">
+  <div class="eyebrow">July 9</div>
+  <h1 class="main-title">Happy 18th<br>Birthday</h1>
+  <div class="script-line">to someone truly special</div>
+
+  <div class="divider"></div>
+
+  <div class="hearts-row">
+    <div class="heart-block">
+      <div class="heart-shape" id="ageHeart">
+        <div class="timer-inner">
+          <div class="age-number" id="ageYears">--</div>
+          <div class="age-caption">years old</div>
+          <div class="age-detail" id="ageDetail">calculating…</div>
+        </div>
+      </div>
+      <div class="heart-label">Since July 9, 2008</div>
+    </div>
+
+    <div class="heart-block">
+      <div class="heart-shape photo">
+        <img src="https://i.ibb.co/wF6q3D89/48257e0f-247e-4ae5-bd7f-aab6fafe534b.jpg" alt="Arya">
+      </div>
+      <div class="heart-label">A Moment To Remember</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="message-card">
+    <div class="message-text" id="messageText">
+      Happy birthday Arya 💋😘<br><br>
+      
+      Finally you are 18 yo now.<br>
+      Finally ab hum aapko adult bula sakte hai.<br>
+      Yayyyyyyyy!<br><br>
+      
+      I hope badi hone ke sath sath aapke andar thodi aur maturity aye.<br><br>
+      
+      And I will pray ki is year tu jis college me jana chahti wo college tujhe mile and aise hi tu khush reh and smile karti reh.<br><br>
+      
+      And tu kitni pyari, cute and kind hai. It really feels so good to have a best friend like you.<br><br>
+      
+      Also, most of the time itna mai relax rehta hu like there is Arya for me yk, to listen to me. And tbh tere samne mere andar ka bacha bhi bahar aa jata hai.<br><br>
+      
+      I hope in this 18th birthday tu aur cute hojaye aur tu jo bhi chahti ho God teri sune aur pura kare.<br><br>
+      
+      👉🏻👈🏻 Kaha 11th me mile the aur ab kaha college jane ki baat ho rhi. Time kitna badal gaya.<br><br>
+      
+      Arya jab apne coaching ki baate share kiya karti thi, ab wo college jayegi aur college ki girls gossip share kiya karegi. 🥺<br><br>
+      
+      I hope you stay always happy like this.<br><br>
+      
+      You are one of the best person I met. Like sach me yaar, the level of comfort I have with you is insane.<br><br>
+      
+      Thank you for being you.
+    </div>
+    <div class="message-sign">With all my love</div>
+  </div>
+
+  <footer>made with love, one slice at a time</footer>
+</div>
+
+<script>
+  /* ---------------- floating background ---------------- */
+  (function backgroundDrift(){
+    const host = document.getElementById('bg-layer');
+    const glyphs = ['♥','❤','✦','✧'];
+    const count = 26;
+    for(let i=0;i<count;i++){
+      const el = document.createElement('div');
+      const isSpark = Math.random() > 0.6;
+      el.className = 'drift ' + (isSpark ? 'spark' : 'heart');
+      el.textContent = isSpark ? glyphs[2 + (Math.random()>0.5?1:0)] : glyphs[Math.random()>0.5?0:1];
+      const size = 12 + Math.random()*22;
+      el.style.fontSize = size + 'px';
+      el.style.left = Math.random()*100 + 'vw';
+      const duration = 10 + Math.random()*14;
+      el.style.animationDuration = duration + 's';
+      el.style.animationDelay = (Math.random()*duration) + 's';
+      host.appendChild(el);
+    }
+  })();
+
+  /* ---------------- cake slicing intro ---------------- */
+  const scene = document.getElementById('cakeScene');
+  const intro = document.getElementById('intro');
+  const confettiHost = document.getElementById('confettiHost');
+  let sliced = false;
+
+  function burstConfetti(){
+    const colors = ['#e0293a','#d4af37','#e3b8a0','#7a1414','#fff0e8'];
+    for(let i=0;i<28;i++){
+      const p = document.createElement('div');
+      p.className = 'confetti-piece burst';
+      const angle = Math.random()*Math.PI*2;
+      const dist = 60 + Math.random()*90;
+      p.style.setProperty('--tx', Math.cos(angle)*dist + 'px');
+      p.style.setProperty('--ty', (Math.sin(angle)*dist - 40) + 'px');
+      p.style.setProperty('--tr', (Math.random()*360) + 'deg');
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.borderRadius = Math.random()>0.5 ? '50%' : '2px';
+      confettiHost.appendChild(p);
+      setTimeout(()=>p.remove(), 1000);
+    }
+  }
+
+  function sliceCake(){
+    if(sliced) return;
+    sliced = true;
+    scene.classList.add('sliced');
+    burstConfetti();
+
+    // Directly play the specified YouTube link starting at 57 seconds
+    const audioStream = document.getElementById('secretVideo');
+    if(audioStream) {
+      audioStream.src = "https://www.youtube.com/embed/O5IIVVOrkgE?autoplay=1&mute=0&start=57&loop=1&playlist=O5IIVVOrkgE";
+    }
+
+    setTimeout(()=>{
+      intro.classList.add('hidden');
+    }, 950);
+  }
+
+  scene.addEventListener('click', sliceCake);
+  scene.addEventListener('touchstart', function(e){ e.preventDefault(); sliceCake(); }, {passive:false});
+
+  /* ---------------- live age counter ---------------- */
+  const birth = new Date(2008, 6, 9, 0, 0, 0); // July 9, 2008
+  const yearsEl = document.getElementById('ageYears');
+  const detailEl = document.getElementById('ageDetail');
+
+  function computeAge(now){
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+    let hours = now.getHours() - birth.getHours();
+    let minutes = now.getMinutes() - birth.getMinutes();
+    let seconds = now.getSeconds() - birth.getSeconds();
+
+    if(seconds < 0){ seconds += 60; minutes--; }
+    if(minutes < 0){ minutes += 60; hours--; }
+    if(hours < 0){ hours += 24; days--; }
+    if(days < 0){
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      days += prevMonth; months--;
+    }
+    if(months < 0){ months += 12; years--; }
+
+    return {years, months, days, hours, minutes, seconds};
+  }
+
+  function pad(n){ return n.toString().padStart(2,'0'); }
+
+  function tick(){
+    const now = new Date();
+    const a = computeAge(now);
+    yearsEl.textContent = a.years;
+    detailEl.innerHTML =
+      `<b>${a.months}</b> mo &nbsp;·&nbsp; <b>${a.days}</b> d<br>` +
+      `${pad(a.hours)}:${pad(a.minutes)}:${pad(a.seconds)}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
